@@ -35,8 +35,7 @@
             input: ['app/scripts/*.js'],
             output: 'dist/scripts/',
             concat: false, // can be `false` of filename
-            uglify: false,
-            enable: false,
+            uglify: false
         },
 
         copyTypescripts:{
@@ -52,8 +51,7 @@
           input: ['app/scripts/libs/**/*.js'],
           output: 'dist/scripts/libs/',
           concat: false, // can be `false` of filename
-          uglify: false,
-          enable: false,
+          uglify: false
         }
 
     };
