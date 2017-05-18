@@ -1,10 +1,9 @@
 /**
 	* TypeScript file
   */
-module First {
-  interface People {
-    table: HTMLTableElement;
-    thead: HTMLTableSectionElement;
-    tbody: HTMLTableSectionElement;
+  function greeter(person: string) {
+      return 'Hello,'  + person;
   }
-}
+  let user = 'Jane User';
+
+  document.body.innerText = greeter(user);
