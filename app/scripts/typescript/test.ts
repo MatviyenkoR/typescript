@@ -11,13 +11,15 @@ module First {
       // Constructor
       constructor(public firstName: string = '...',
                   public lastName: string = '...',
-                  public city: string = '...') {
-              this.firstName = (<HTMLInputElement>document.getElementById('name')).value || ' X';
-              this.lastName = (<HTMLInputElement>document.getElementById('last')).value || 'Mr.';
-              this.city = (<HTMLInputElement>document.getElementById('city')).value || 'nowhere';
-      }
-      // Function
+                  public city: string = '...') {}
+      // Methods
+      public getData(): string {
+        return this.firstName = (<HTMLInputElement>document.getElementById('name')).value || ' X',
+               this.lastName = (<HTMLInputElement>document.getElementById('last')).value || 'Mr.',
+               this.city = (<HTMLInputElement>document.getElementById('city')).value || 'nowhere';
+             }
       public greet(): string {
+        this.getData();
         const greeting: string = 'Hello ' + this.printFullInfo() + '!';
         const container = <HTMLElement> document.getElementById('root');
         return container.innerText = greeting;
@@ -30,6 +32,9 @@ module First {
       }
       public greetingWith = (): string => {
         return this.printFullInfo() + ' greeting with you!';
+      }
+      public deleteRow(): MouseEvent {
+        return;
       }
   }
 
@@ -57,19 +62,23 @@ module First {
       }
 
       public add(): void {
+        super.getData();
         const newPerson = this.table.tBodies[0].insertRow(this.rows);
         const id = newPerson.insertCell(0);
         id.innerText =  this.rows.toString();
         const name = newPerson.insertCell(1);
-        name.innerText = (<HTMLInputElement>document.getElementById('name')).value || 'X';
+        name.innerText = this.firstName;
         const last = newPerson.insertCell(2);
-        last.innerText = (<HTMLInputElement>document.getElementById('last')).value || 'Mr.';
+        last.innerText = this.lastName;
         const city = newPerson.insertCell(3);
-        city.innerText = (<HTMLInputElement>document.getElementById('city')).value || 'nowhere';
+        city.innerText = this.city;
         const greet = newPerson.insertCell(4);
         greet.innerText = this.greetingWith();
-        // const button = <HTMLElement> document.createElement('button');
-        // del.appendChild(button);
+        const del = newPerson.insertCell(5);
+        del.id = 'delete';
+        const button = <HTMLElement> document.createElement('button');
+        button.onclick = () => this.deleteRow();
+        del.appendChild(button);
         this.rows = this.rows + 1;
       }
   }
@@ -102,17 +111,15 @@ module First {
 }
 
   // ToDO
-  const firstOne = new Student();
+  const firstOne = new Student().greet();
   const newTab = new Table();
-  firstOne.greet();
   const timeEl = document.getElementById('cityTime');
   const timer = new Timer(timeEl);
   timer.start();
   // Click greet
   const greeting = document.getElementById('greet');
   greeting.addEventListener('click', () => {
-    const newOne = new Student();
-    newOne.greet();
+    const newOne = new Student().greet();
     newTab.add();
   });
 }
