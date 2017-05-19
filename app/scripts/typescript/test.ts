@@ -33,9 +33,6 @@ module First {
       public greetingWith = (): string => {
         return this.printFullInfo() + ' greeting with you!';
       }
-      public deleteRow(): MouseEvent {
-        return;
-      }
   }
 
   class Table extends Student implements People {
@@ -59,6 +56,10 @@ module First {
         cell2.innerText = 'LastName';
         const cell3 = hrow.insertCell(3);
         cell3.innerText = 'City';
+        const cell4 = hrow.insertCell(4);
+        cell4.innerText = 'Greeter';
+        const cell5 = hrow.insertCell(5);
+        cell5.innerText = 'del';
       }
 
       public add(): void {
@@ -77,49 +78,55 @@ module First {
         const del = newPerson.insertCell(5);
         del.id = 'delete';
         const button = <HTMLElement> document.createElement('button');
-        button.onclick = () => this.deleteRow();
+        button.onclick = () => this.deleteRow(event);
         del.appendChild(button);
         this.rows = this.rows + 1;
       }
+      public deleteRow(e: Event): MouseEvent {
+        const target = <HTMLElement> e.target;
+        // return console.log(target.remove);
+        // target.parentElement.parentElement.remove();
+        target.parentElement.parentElement.style.display = 'none';
+        return;
+      }
   }
   class Timer {
-    private element: HTMLElement;
-    private span: HTMLElement;
-    private timerToken: number;
+    private clockHandler: number;
+    private target: HTMLElement;
 
-    constructor (element: HTMLElement) {
-        this.element = element;
-        this.element.innerText = 'The time is: ';
-        this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        const t = new Date();
-        t.setUTCDate(3);
-        this.span.innerText = t.toString();
-    }
+  constructor(el: HTMLElement) {
+    this.target = el;
+    this.target.innerText = 'Time is now:' + this.getTime();
+  }
 
-    public start() {
-        this.timerToken = setInterval(() => { const t = new Date();
-                                              t.setUTCDate(3);
-                                              this.span.innerText = t.toString();
-                                            }, 1000);
-    }
+   private getTime() {
+      let date;
+      return  date = new Date();
+      //  return date;
+   }
 
-    private stop() {
-        clearTimeout(this.timerToken);
-    }
+   public start(): void {
+       this.clockHandler = setInterval((parent) => {
+           this.target.innerText = 'Time is now: ' + this.getTime();
+       }, 1000);
+   }
+
+   private stop(): void {
+       clearInterval(this.clockHandler);
+   }
 
 }
 
   // ToDO
-  const firstOne = new Student().greet();
+  const firstOne = new Student();
+  firstOne.greet();
   const newTab = new Table();
   const timeEl = document.getElementById('cityTime');
-  const timer = new Timer(timeEl);
-  timer.start();
+  const timer = new Timer(timeEl).start();
   // Click greet
   const greeting = document.getElementById('greet');
   greeting.addEventListener('click', () => {
-    const newOne = new Student().greet();
+    firstOne.greet();
     newTab.add();
   });
 }
