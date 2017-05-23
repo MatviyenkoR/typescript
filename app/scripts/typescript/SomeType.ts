@@ -1,7 +1,7 @@
 /**
 	* MyClassSAvchenko
   */
-export {alice} from './SomeType';
+export {myObj} from './printLabel';
 
 // export default class SomeType {
 //   constructor(public firstName: string = ' ',

@@ -1,38 +1,28 @@
 /**
 	* TypeScript file
   */
-let alice: SomeType = new Employee('Microsoft', 'Alice');
-
-class SomeType {
-    public name: string;
-    constructor(userName: string) {
-        this.name = userName;
+module Validation {
+    export interface StringValidator {
+        isAcceptable(s: string): boolean;
     }
 }
 
-class Employee extends SomeType {
-    public company: string;
-    constructor(employeeCompany: string, userName: string) {
-        super(userName);
-        this.company = employeeCompany;
-    }
+function printLabel(labelledObj: {label: string}) {
+  console.log(labelledObj.label);
+}
+let myObj = {size: 20, label: 'Size 20 Object'};
+printLabel(myObj);
+
+interface LabelledValue {
+  label: string;
 }
 
-function getUserName(user: SomeType): string {
-    return user.name;
+function printLabel(labelledObj: LabelledValue) {
+  console.log(labelledObj.label);
 }
 
-function userFactory(name: string): SomeType {
-    return new Employee('не установлено', name);
-}
-
-let alice: Employee = new Employee('Microsoft', 'Alice');
-let userName = getUserName(alice);
-console.log(userName);
-
-let tom = userFactory('Tom');
-userName = getUserName(tom);
-console.log(userName);
+let myObj = {size: 10, label: 'Size 10 Object'};
+printLabel(myObj);
 
 // module User {
 //   class SomeType {
