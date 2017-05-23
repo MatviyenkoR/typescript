@@ -1,28 +1,46 @@
 /**
 	* TypeScript file
   */
-// function greeter(person : string) {
-//     return 'Hello,'  + person;
-// }
-// let users = 'Jane User';
+let alice: SomeType = new Employee('Microsoft', 'Alice');
 
-// document.body.innerText = greeter(users);
-
-interface Person {
-  firstName: string;
-  lastName: string;
+class SomeType {
+    public name: string;
+    constructor(userName: string) {
+        this.name = userName;
+    }
 }
 
-class Student implements Person {
-  public fullName: string;
-  constructor(public firstName: string, public middleInitial: string, public lastName: string) {
-      this.fullName = firstName + ' ' + middleInitial + ' ' + lastName;
-      // document.body.innerText = this.fullName;
-  }
-  public greetersy(): string {
-    return 'Hello, ' + this.fullName;
-  }
+class Employee extends SomeType {
+    public company: string;
+    constructor(employeeCompany: string, userName: string) {
+        super(userName);
+        this.company = employeeCompany;
+    }
 }
-let user = new Student('Jane', 'M.', 'User');
 
-document.body.innerText = user.greetersy();
+function getUserName(user: SomeType): string {
+    return user.name;
+}
+
+function userFactory(name: string): SomeType {
+    return new Employee('не установлено', name);
+}
+
+let alice: Employee = new Employee('Microsoft', 'Alice');
+let userName = getUserName(alice);
+console.log(userName);
+
+let tom = userFactory('Tom');
+userName = getUserName(tom);
+console.log(userName);
+
+// module User {
+//   class SomeType {
+//     constructor(public firstName: string = ' ',
+//                 public lastName: string = ' ',
+//                 public city: string = ' ') {
+//                   this.firstName = ();
+//                   this.lastName = ();
+//                   this.city = ();
+//                 }
+//   }
