@@ -1,14 +1,37 @@
-body.new-homepage {
-    border-bottom: 1px solid #55565a;
-	background-color: #f1eff0;
-}
 body {
-  .wrapper{
-    margin: 0px;
+  margin: 10px 10px;
+  span {
+    display: block;
+    font-size: 16px;
+    font-family: serif;
+    font-weight: bold;
   }
-  .root2{
-    height: 200px;
-    width: 200px;
-    color: white;
+  input {
+    font-size: 16px;
+    font-family: sans-serif;
+  }
+  #root {
+    font-size: 30px;
+    font-family: sans-serif;
+    color: blue;
+    margin: 10px 10px;
+  }
+  #greet {
+    font-size: 16px;
+  }
+  #wrapper {
+    table {
+      display: table;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    table, th, td {
+    border: 1px solid black;
+    }
+  }
+  #cityTime {
+    font-size: 20px;
+    margin: 10px 10px;
+    font-weight: bold;
   }
 }

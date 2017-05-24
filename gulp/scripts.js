@@ -17,7 +17,10 @@
         uglify = require('gulp-uglify'),
         watch = require("gulp-watch"),
         tslint = require("gulp-tslint"),
-        ts = require('gulp-typescript');
+        ts = require('gulp-typescript'),
+        webpack = require('webpack'),
+        gutil = require('gulp-util'),
+        webpackConf = require('./../webpack.config');
 
     // ---------------------------------------------------------
     // Settings for scripts tasks
@@ -116,26 +119,26 @@
               emitError: false
             }))
      });
-    
-    
-    gulp.task('copyTypescripts',['tslint'], function(){
-        
-        //var task = tasks.copyTypescripts;
-        //var stream = gulp.src(task.input)
-        //    .pipe(ts({
-        //        noImplicitAny: true
-        //    }))
-        
-        //stream.pipe(gulp.dest(task.output));
 
-        //return merge(stream);
-        
-        var tsProject = ts.createProject("tsconfig.json");
-        var task = tasks.copyTypescripts;
-        return tsProject.src()
-          .pipe(tsProject())
-          .js
-          .pipe(gulp.dest(task.output));
+
+    gulp.task('copyTypescripts',['tslint'], function(){
+
+
+        // var tsProject = ts.createProject("tsconfig.json");
+        // var task = tasks.copyTypescripts;
+        // return tsProject.src()
+        //   .pipe(tsProject())
+        //   .js
+        //   .pipe(gulp.dest(task.output));
+        var myConfig = Object.create(webpackConf);
+        webpack(myConfig, function(err, stats) {
+            if(err) throw new gutil.PluginError("webpack", err);
+            gutil.log("[webpack]", stats.toString({
+              colors: true,
+              progress: true
+            }));
+        });
+
     });
 
 

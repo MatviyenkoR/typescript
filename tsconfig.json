@@ -1,16 +1,22 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "noImplicitAny": true,
-        "removeComments": true,
-        "preserveConstEnums": true
-    },
-    "include":[
-      "app/scripts/typescript/**/*.ts"
-    ],
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es6", "dom"],
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "types":[
+      "jquery"
+    ]
+  },
     "exclude": [
       "node_modules",
-      "dist"
-    ]
+      "dist",
+      "./node_modules"
+    ],
+    "compileOnSave": false
 }

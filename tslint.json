@@ -27,7 +27,7 @@
       false
     ],
     "eofline": false,
-    "export-name": true,
+    "export-name": false,
     "file-header": [
       false
     ],
@@ -46,10 +46,6 @@
     "jquery-deferred-must-complete": true,
     "jsdoc-format": false,
     "label-position": true,
-    //"linebreak-style": [
-    //  true,
-    //  "windows"
-    //],
     "max-classes-per-file": [
       false
     ],
@@ -64,7 +60,7 @@
       }
     ],
     "max-line-length": [
-      true,
+      false,
       140
     ],
     "member-access": true,
