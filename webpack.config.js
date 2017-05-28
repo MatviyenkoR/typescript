@@ -1,6 +1,6 @@
 "use strict";
 module.exports = {
-    entry: './app/scripts/typescript/test.ts',
+    entry: './app/scripts/app.ts',
     output: {
         filename: './dist/scripts/typescripts.js'
     },
