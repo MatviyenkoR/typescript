@@ -210,7 +210,7 @@
         }
 
         if ( tasks.copyTypescripts.enable !== false ) {
-            watch(tasks.copyTypescripts.watch,function(){ gulp.start('copyTypescripts'); });
+            watch(tasks.copyTypescripts.watch,function(){ gulp.start('copyTypescripts'); gulp.start('watchDefaultApp');});
         }
 
         if ( tasks.watchDefaultApp.enable !== false ) {
