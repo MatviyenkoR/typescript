@@ -19,7 +19,7 @@ import {Student} from './Student';
  * Create class Table
  * @extends Student class
  */
-class Table extends Student {
+export class Table extends Student {
 
     /**
      * Table class variables: type
@@ -75,43 +75,3 @@ class Table extends Student {
         return;
       }
   }
-
-  class Timer {
-    private clockHandler: number;
-    private target: HTMLElement;
-
-  constructor(el: HTMLElement) {
-    this.target = el;
-    this.target.innerText = 'Time is now:' + this.getTime();
-  }
-
-   private getTime() {
-      let date;
-      return  date = new Date();
-      //  return date;
-   }
-
-   public start(): void {
-       this.clockHandler = setInterval((parent) => {
-           this.target.innerText = 'Time is now: ' + this.getTime();
-       }, 1000);
-   }
-
-   private stop(): void {
-       clearInterval(this.clockHandler);
-   }
-
-}
-
-  // ToDO
-  const firstOne = new Student();
-  firstOne.greet();
-  const newTab = new Table();
-  const timeEl = document.getElementById('cityTime');
-  const timer = new Timer(timeEl).start();
-  // Click greet
-  const greeting = document.getElementById('greet');
-  greeting.addEventListener('click', () => {
-    firstOne.greet();
-    newTab.add();
-  });

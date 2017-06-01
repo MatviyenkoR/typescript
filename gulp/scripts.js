@@ -44,7 +44,15 @@
         copyTypescripts:{
           watch: ['app/scripts/typescript/**/*.ts'],
           input: ['app/scripts/typescript/**/*.ts'],
-          output: 'dist/scripts/typescript',
+          output: 'dist/scripts',
+          concat: false, // can be `false` of filename
+          uglify: false
+        },
+
+        watchDefaultApp:{
+          watch: ['app/scripts/*.ts'],
+          input: ['app/scripts/*.ts'],
+          output: 'dist/scripts',
           concat: false, // can be `false` of filename
           uglify: false
         },
@@ -124,6 +132,26 @@
     gulp.task('copyTypescripts',['tslint'], function(){
 
 
+        var tsProject = ts.createProject("tsconfig.json");
+        var task = tasks.copyTypescripts;
+        return tsProject.src()
+          .pipe(tsProject())
+          .js
+          .pipe(gulp.dest(task.output));
+        // var myConfig = Object.create(webpackConf);
+        // webpack(myConfig, function(err, stats) {
+        //     if(err) throw new gutil.PluginError("webpack", err);
+        //     gutil.log("[webpack]", stats.toString({
+        //       colors: true,
+        //       progress: true
+        //     }));
+        // });
+
+    });
+
+    gulp.task('watchDefaultApp',['tslint'], function(){
+
+
         // var tsProject = ts.createProject("tsconfig.json");
         // var task = tasks.copyTypescripts;
         // return tsProject.src()
@@ -182,7 +210,11 @@
         }
 
         if ( tasks.copyTypescripts.enable !== false ) {
-            watch(tasks.copyTypescripts.watch,function(){ gulp.start('copyTypescripts'); });
+            watch(tasks.copyTypescripts.watch,function(){ gulp.start('copyTypescripts'); gulp.start('watchDefaultApp');});
+        }
+
+        if ( tasks.watchDefaultApp.enable !== false ) {
+            watch(tasks.watchDefaultApp.watch,function(){ gulp.start('watchDefaultApp'); });
         }
 
     });
